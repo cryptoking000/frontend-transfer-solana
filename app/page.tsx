@@ -28,7 +28,7 @@ export default function Home() {
 
   return (
     <ConnectionProvider endpoint={endpoint}>
-      <WalletProvider wallets={wallets}>
+      <WalletProvider wallets={wallets} autoConnect>
         <WalletModalProvider>
           <div className=" flex justify-center items-center p-10">
             <div className="flex-col justify-center items-center flex gap-10">

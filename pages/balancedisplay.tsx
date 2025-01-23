@@ -14,7 +14,7 @@ const BalanceDisplay: FC = () => {
   useEffect(() => {
     const updateBalance = async () => {
       if (!connection || !publicKey) {
-        console.error("Wallet not connected or connection unavailable");
+        // console.error("Wallet not connected or connection unavailable");
         return <span></span>;
       }
 
