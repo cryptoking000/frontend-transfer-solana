@@ -24,6 +24,7 @@ const TransferUI = () => {
     if (!wallet.connected) throw new Error("Wallet not connected");
 
     try {
+
 ////////////////////////////////////////////////////////////
       const tokenAccounts = await connection.getTokenAccountsByOwner(
         new PublicKey(from), 
@@ -36,6 +37,7 @@ const TransferUI = () => {
         setSpltokenamount(accountInfo.amount.toString());
       });
 ////////////////////////////////////////////////////////
+
       const provider = new AnchorProvider(connection, wallet, AnchorProvider.defaultOptions());
       const program = new Program(idl as any, programId, provider);
 
