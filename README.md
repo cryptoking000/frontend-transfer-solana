@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+## **TransferUI Component**
 
-First, run the development server:
+This React component provides a simple UI for transferring SPL tokens on the Solana blockchain using the Anchor framework. Below are the key features and functionalities:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### **Features**
+1. **Wallet Integration**:
+   - Utilizes the `@solana/wallet-adapter-react` package to connect a wallet for sending tokens.
+   - Supports checking wallet connection status.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Token Balance Retrieval**:
+   - Retrieves and displays the SPL token balance of the sender's wallet.
+   - Queries token accounts owned by the sender and decodes their balances using `@solana/spl-token`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **Token Transfer**:
+   - Transfers SPL tokens from the sender's wallet to the recipient's wallet.
+   - Uses an Anchor program to facilitate the token transfer.
+   - Handles decimals to calculate the correct token amount.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. **Error Handling**:
+   - Displays errors and warnings for issues such as disconnected wallets, failed transfers, or invalid inputs.
+   - Logs detailed error messages in the browser console.
 
-## Learn More
+### **Props and State Management**
+- The component uses `useState` for managing input fields such as sender wallet address, recipient wallet address, mint address, and transfer amount.
+- Uses `jotai`'s `useAtom` to manage wallet context (`walletAtom`).
 
-To learn more about Next.js, take a look at the following resources:
+### **How It Works**
+1. **Connect Wallet**:
+   - The sender's wallet must be connected to the Solana devnet.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Set Inputs**:
+   - Fill in the sender wallet address, recipient wallet address, token mint address, and the desired transfer amount.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. **Check Balance**:
+   - Displays the balance of the SPL token in the sender's associated token account.
 
-## Deploy on Vercel
+4. **Transfer SPL Tokens**:
+   - Calls an Anchor program to perform the token transfer on the Solana blockchain.
+   - Automatically calculates the correct associated token accounts (ATAs) for both sender and recipient based on the mint address.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. **Alert and Log**:
+   - Shows an alert upon successful transfer with the transaction signature.
+   - Logs the transaction signature and errors (if any) in the browser console.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### **Technologies Used**
+- **React** for UI.
+- **@solana/web3.js** for Solana blockchain interaction.
+- **@project-serum/anchor** for Anchor framework integration.
+- **@solana/spl-token** for SPL token account and transfer management.
+- **jotai** for state management.
+
+### **Usage**
+To use this component:
+1. Install the required packages:
+   ```bash
+   npm install @solana/web3.js @project-serum/anchor @solana/wallet-adapter-react @solana/spl-token jotai
+   ```
+2. Add the `TransferUI` component to your app.
+3. Make sure the Anchor program ID and Solana devnet RPC URL are correctly configured.
+![image](https://github.com/user-attachments/assets/80436ea6-9dae-4c70-8d18-cfc803a317b2)
